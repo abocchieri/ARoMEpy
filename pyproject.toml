@@ -33,6 +33,7 @@ dependencies = [
     "celerite",
     "radvel",
     "PyAstronomy",
+    "ipykernel",
 ]
 
 [project.readme]
