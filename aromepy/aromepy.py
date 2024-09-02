@@ -1,6 +1,6 @@
 import numpy as np
 from scipy import integrate
-from arome.utilities import *
+from aromepy.utilities import *
 import radvel
 from PyAstronomy import pyasl
 
