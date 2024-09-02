@@ -3,6 +3,21 @@
 import numpy as np
 
 
+__all__ = [
+    "funcF00",
+    "funcF10",
+    "funcF01",
+    "funcF11",
+    "funcF20",
+    "funcF02",
+    "funcIxn",
+    # "funcLimb",
+    "HessIxn",
+    # "dfuncLimb",
+    # "ddfuncLimb",
+]
+
+
 def funcF00(x0, y0, rx, ry, phi):
     return 0.5 * (rx * ry * phi + x0 * ry * np.sin(phi) - y0 * rx * np.cos(phi))
 
@@ -25,6 +40,19 @@ def funcF01(x0, y0, rx, ry, phi):
     )
 
 
+def funcF11(x0, y0, rx, ry, phi):
+    return (
+        0.25
+        * x0
+        * y0
+        * (2.0 * rx * ry * phi + x0 * ry * np.sin(phi) - y0 * rx * np.cos(phi))
+        + 0.125 * (x0 * ry * np.sin(phi)) ** 2
+        - 0.125 * (y0**2 + ry**2) * (rx * np.cos(phi)) ** 2
+        + 1.0 / 48.0 * y0 * rx**2 * ry * (15.0 * np.sin(phi) - np.sin(3 * phi))
+        - 1.0 / 48.0 * x0 * rx * ry**2 * (15.0 * np.cos(phi) + np.cos(3 * phi))
+    )
+
+
 def funcF20(x0, y0, rx, ry, phi):
     return (
         -1.0 * x0**2 * y0 * rx * np.cos(phi)
@@ -44,19 +72,6 @@ def funcF02(x0, y0, rx, ry, phi):
         + 1.0 / 12.0 * x0 * ry**3 * (3.0 * np.sin(phi) - np.sin(3.0 * phi))
         - 1.0 / 6.0 * y0 * rx * ry**2 * (3.0 * np.cos(phi) + np.cos(3.0 * phi))
         + 1.0 / 32.0 * ry**3 * rx * (4.0 * phi - np.sin(4.0 * phi))
-    )
-
-
-def funcF11(x0, y0, rx, ry, phi):
-    return (
-        0.25
-        * x0
-        * y0
-        * (2.0 * rx * ry * phi + x0 * ry * np.sin(phi) - y0 * rx * np.cos(phi))
-        + 0.125 * (x0 * ry * np.sin(phi)) ** 2
-        - 0.125 * (y0**2 + ry**2) * (rx * np.cos(phi)) ** 2
-        + 1.0 / 48.0 * y0 * rx**2 * ry * (15.0 * np.sin(phi) - np.sin(3 * phi))
-        - 1.0 / 48.0 * x0 * rx * ry**2 * (15.0 * np.cos(phi) + np.cos(3 * phi))
     )
 
 

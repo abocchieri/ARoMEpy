@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 from scipy import integrate
-import utilities as ut
+from utilities import *
 import radvel
 from PyAstronomy import pyasl
 
@@ -280,36 +280,24 @@ def arome_calc_fvpbetap(x, y, z, dic):
         phi1 = phi0 - psi
         phi2 = phi0 + psi
 
-        a00 = ut.funcF00(0.0, 0.0, 1.0, 1.0, phi2) - ut.funcF00(
-            0.0, 0.0, 1.0, 1.0, phi1
-        )
-        xbar = ut.funcF10(0.0, 0.0, 1.0, 1.0, phi2) - ut.funcF10(
-            0.0, 0.0, 1.0, 1.0, phi1
-        )
-        ybar = ut.funcF01(0.0, 0.0, 1.0, 1.0, phi2) - ut.funcF01(
-            0.0, 0.0, 1.0, 1.0, phi1
-        )
-        axx = ut.funcF20(0.0, 0.0, 1.0, 1.0, phi2) - ut.funcF20(
-            0.0, 0.0, 1.0, 1.0, phi1
-        )
-        ayy = ut.funcF02(0.0, 0.0, 1.0, 1.0, phi2) - ut.funcF02(
-            0.0, 0.0, 1.0, 1.0, phi1
-        )
-        axy = ut.funcF11(0.0, 0.0, 1.0, 1.0, phi2) - ut.funcF11(
-            0.0, 0.0, 1.0, 1.0, phi1
-        )
+        a00 = funcF00(0.0, 0.0, 1.0, 1.0, phi2) - funcF00(0.0, 0.0, 1.0, 1.0, phi1)
+        xbar = funcF10(0.0, 0.0, 1.0, 1.0, phi2) - funcF10(0.0, 0.0, 1.0, 1.0, phi1)
+        ybar = funcF01(0.0, 0.0, 1.0, 1.0, phi2) - funcF01(0.0, 0.0, 1.0, 1.0, phi1)
+        axx = funcF20(0.0, 0.0, 1.0, 1.0, phi2) - funcF20(0.0, 0.0, 1.0, 1.0, phi1)
+        ayy = funcF02(0.0, 0.0, 1.0, 1.0, phi2) - funcF02(0.0, 0.0, 1.0, 1.0, phi1)
+        axy = funcF11(0.0, 0.0, 1.0, 1.0, phi2) - funcF11(0.0, 0.0, 1.0, 1.0, phi1)
 
         # planet boundary
         psi = np.arccos(-1.0 * (1.0 - rho**2 - r**2) / (2.0 * r * rho))
         phi1 = phi0 + np.pi - psi
         phi2 = phi0 + np.pi + psi
 
-        a00 += ut.funcF00(x, y, rx, ry, phi2) - ut.funcF00(x, y, rx, ry, phi1)
-        xbar += ut.funcF10(x, y, rx, ry, phi2) - ut.funcF10(x, y, rx, ry, phi1)
-        ybar += ut.funcF01(x, y, rx, ry, phi2) - ut.funcF01(x, y, rx, ry, phi1)
-        axx += ut.funcF20(x, y, rx, ry, phi2) - ut.funcF20(x, y, rx, ry, phi1)
-        ayy += ut.funcF02(x, y, rx, ry, phi2) - ut.funcF02(x, y, rx, ry, phi1)
-        axy += ut.funcF11(x, y, rx, ry, phi2) - ut.funcF11(x, y, rx, ry, phi1)
+        a00 += funcF00(x, y, rx, ry, phi2) - funcF00(x, y, rx, ry, phi1)
+        xbar += funcF10(x, y, rx, ry, phi2) - funcF10(x, y, rx, ry, phi1)
+        ybar += funcF01(x, y, rx, ry, phi2) - funcF01(x, y, rx, ry, phi1)
+        axx += funcF20(x, y, rx, ry, phi2) - funcF20(x, y, rx, ry, phi1)
+        ayy += funcF02(x, y, rx, ry, phi2) - funcF02(x, y, rx, ry, phi1)
+        axy += funcF11(x, y, rx, ry, phi2) - funcF11(x, y, rx, ry, phi1)
 
         xbar /= a00
         ybar /= a00
@@ -317,17 +305,17 @@ def arome_calc_fvpbetap(x, y, z, dic):
         ayy = ayy / a00 - ybar**2
         axy = axy / a00 - xbar * ybar
 
-    II = ut.funcIxn(xbar, ybar, dic, 0)
-    Hxx0, Hyy0, Hxy0 = ut.HessIxn(xbar, ybar, dic, 0)
+    II = funcIxn(xbar, ybar, dic, 0)
+    Hxx0, Hyy0, Hxy0 = HessIxn(xbar, ybar, dic, 0)
     ff = a00 * (II + 0.5 * (Hxx0 * axx + Hyy0 * ayy + 2.0 * Hxy0 * axy))
 
-    Hxx1, Hyy1, Hxy1 = ut.HessIxn(xbar, ybar, dic, 1)
+    Hxx1, Hyy1, Hxy1 = HessIxn(xbar, ybar, dic, 1)
     Hxx1 -= xbar * Hxx0
     Hyy1 -= xbar * Hyy0
     Hxy1 -= xbar * Hxy0
     vv = xbar + 0.5 / II * (Hxx1 * axx + Hyy1 * ayy + 2.0 * Hxy1 * axy)
 
-    Hxx2, Hyy2, Hxy2 = ut.HessIxn(xbar, ybar, dic, 2)
+    Hxx2, Hyy2, Hxy2 = HessIxn(xbar, ybar, dic, 2)
 
     Hxx2 -= xbar**2 * Hxx0
     Hyy2 -= xbar**2 * Hyy0
@@ -355,7 +343,7 @@ def arome_calc_fvpbetap(x, y, z, dic):
             powers[i] = dic["powers"][i]
             dic["powers"][i] += 4
 
-        Hxx2, Hyy2, Hxy2 = ut.HessIxn(xbar, ybar, dic, 0)
+        Hxx2, Hyy2, Hxy2 = HessIxn(xbar, ybar, dic, 0)
         Hxx2 -= mu2bar * Hxx0
         Hyy2 -= mu2bar * Hyy0
         Hxy2 -= mu2bar * Hxy0
