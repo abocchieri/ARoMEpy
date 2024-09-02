@@ -5,6 +5,9 @@ import radvel
 from PyAstronomy import pyasl
 
 
+__all__ = ["pyarome"]
+
+
 def pyarome(
     t,
     t0,
