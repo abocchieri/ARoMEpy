@@ -9,5 +9,5 @@
 To install the tool from GitHub:
 
 ```bash
-pip install git+https://github.com/esedagha/ARoMEpy.git
+pip install git+https://github.com/abocchieri/ARoMEpy.git
 ```
