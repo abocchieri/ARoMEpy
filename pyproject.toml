@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=61.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aromepy"
+version = "1.0.0-alpha"
+authors = [
+    {name = "Elyar Sedaghati <esedagha@eso.org>"},
+    {name = "Andrea Bocchieri"},
+]
+description = "ARoMEpy is a Python implementation of the Rossiter-McLaughlin anomaly."
+license = {text = "BSD-3-Clause"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: POSIX",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Unix",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries",
+]
+requires-python = ">3.8"
+dependencies = [
+    "numpy",
+    "scipy",
+    "h5py",
+    "celerite",
+    "radvel",
+    "PyAstronomy",
+    "ipykernel",
+]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.urls]
+Homepage = "https://github.com/esedagha/ARoMEpy"
+"Bug Tracker" = "https://github.com/esedagha/ARoMEpy/issues"
+"Source Code" = "https://github.com/esedagha/ARoMEpy"
+
+[project.optional-dependencies]
+
+[project.scripts]
+
+[tool.setuptools]
+zip-safe = true
+include-package-data = true
+license-files = ["LICENSE"]
+
+[tool.setuptools.packages]
+find = {namespaces = false}
