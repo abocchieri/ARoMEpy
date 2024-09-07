@@ -41,9 +41,9 @@ file = "README.md"
 content-type = "text/markdown"
 
 [project.urls]
-Homepage = "https://github.com/esedagha/ARoMEpy"
-"Bug Tracker" = "https://github.com/esedagha/ARoMEpy/issues"
-"Source Code" = "https://github.com/esedagha/ARoMEpy"
+Homepage = "https://github.com/abocchieri/ARoMEpy"
+"Bug Tracker" = "https://github.com/abocchieri/ARoMEpy/issues"
+"Source Code" = "https://github.com/abocchieri/ARoMEpy"
 
 [project.optional-dependencies]
 
