@@ -6,7 +6,14 @@
 
 ## Installation
 
-To install the tool from GitHub:
+To install from source, clone the repository and move inside the directory.
+Then use pip as:
+
+```bash
+pip install .
+```
+
+To install directly from the repository, use:
 
 ```bash
 pip install git+https://github.com/abocchieri/ARoMEpy.git
